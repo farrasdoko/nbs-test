@@ -235,14 +235,14 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         if let path = viewModel.popArray.first?.backdropPath {
             self.group.enter()
             
-            self.banner1.load(imageUrl+path, completion: {
+            self.banner1.load(path, completion: {
                 self.group.leave()
             })
         }
         if let path = viewModel.popArray[1].backdropPath {
             self.group.enter()
             
-            self.banner2.load(imageUrl+path, completion: {
+            self.banner2.load(path, completion: {
                 self.group.leave()
             })
         }
