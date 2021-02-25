@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="SearchCell" customModule="nbs_test" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="160" height="262"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="160" height="262"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xpg-U1-Q9V">
+                        <rect key="frame" x="0.0" y="0.0" width="160" height="211"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maze Runner" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="voa-ua-Vmz">
+                        <rect key="frame" x="0.0" y="219" width="160" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dylan O'Brien, Kaya Scodelario, Will Poulter " lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJE-iI-eN5">
+                        <rect key="frame" x="0.0" y="238" width="160" height="24"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Action, Drama" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bhL-kI-V31">
+                        <rect key="frame" x="5" y="194" width="69" height="12"/>
+                        <color key="backgroundColor" red="0.99696093799999996" green="0.79454547170000001" blue="0.23507434129999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="2"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.clipToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="jJE-iI-eN5" firstAttribute="top" secondItem="voa-ua-Vmz" secondAttribute="bottom" constant="4" id="0Qd-jn-X3y"/>
+                <constraint firstItem="voa-ua-Vmz" firstAttribute="top" secondItem="Xpg-U1-Q9V" secondAttribute="bottom" constant="8" id="8Zb-Qg-s4K"/>
+                <constraint firstItem="voa-ua-Vmz" firstAttribute="leading" secondItem="Xpg-U1-Q9V" secondAttribute="leading" id="Edm-NL-WSt"/>
+                <constraint firstAttribute="bottom" secondItem="jJE-iI-eN5" secondAttribute="bottom" id="EwQ-He-5dU"/>
+                <constraint firstItem="Xpg-U1-Q9V" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="GHf-DF-LXB"/>
+                <constraint firstItem="jJE-iI-eN5" firstAttribute="leading" secondItem="voa-ua-Vmz" secondAttribute="leading" id="Ngu-Ze-3RO"/>
+                <constraint firstAttribute="trailing" secondItem="Xpg-U1-Q9V" secondAttribute="trailing" id="OvD-iZ-SBQ"/>
+                <constraint firstItem="Xpg-U1-Q9V" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="bdv-by-lex"/>
+                <constraint firstItem="jJE-iI-eN5" firstAttribute="trailing" secondItem="voa-ua-Vmz" secondAttribute="trailing" id="ewM-47-w30"/>
+                <constraint firstItem="voa-ua-Vmz" firstAttribute="trailing" secondItem="Xpg-U1-Q9V" secondAttribute="trailing" id="iYp-7S-F8M"/>
+                <constraint firstItem="bhL-kI-V31" firstAttribute="leading" secondItem="Xpg-U1-Q9V" secondAttribute="leading" constant="5" id="qtk-B3-cii"/>
+                <constraint firstItem="bhL-kI-V31" firstAttribute="bottom" secondItem="Xpg-U1-Q9V" secondAttribute="bottom" constant="-5" id="sVI-Vh-cUm"/>
+            </constraints>
+            <size key="customSize" width="210" height="325"/>
+            <connections>
+                <outlet property="castLb" destination="jJE-iI-eN5" id="Ke8-e8-SWP"/>
+                <outlet property="genreLb" destination="bhL-kI-V31" id="etp-zX-SbH"/>
+                <outlet property="posterImg" destination="Xpg-U1-Q9V" id="Y9A-fw-zlB"/>
+                <outlet property="titleLb" destination="voa-ua-Vmz" id="vUH-Dq-Ji5"/>
+            </connections>
+            <point key="canvasLocation" x="253.62318840579712" y="173.4375"/>
+        </collectionViewCell>
+    </objects>
+</document>
