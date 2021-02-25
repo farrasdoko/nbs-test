@@ -231,7 +231,6 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func fetchBanner() {
-        let imageUrl = "https://image.tmdb.org/t/p/w500"
         if let path = viewModel.popArray.first?.backdropPath {
             self.group.enter()
             
@@ -249,7 +248,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         if let path = viewModel.popArray[2].backdropPath {
             self.group.enter()
             
-            self.banner3.load(imageUrl+path, completion: {
+            self.banner3.load(path, completion: {
                 self.group.leave()
             })
         }
