@@ -27,42 +27,50 @@ class SearchVM {
         self.services = services
         queryPublisher
             .flatMap { queryString in
-                return Publishers.MergeMany( services.map{$0.search(queryString)} )
-                    .collect()
-                    .eraseToAnyPublisher()
+                return Publishers.MergeMany( services.map{
+                    $0.search(self.getQuery(queryString))
+                })
+                .collect()
+                .eraseToAnyPublisher()
             }
             .receive(on: RunLoop.main)
             .sink{ self.imageUrls = $0.flatMap{$0} }
             .store(in: &cancellables)
     }
     
+    func getQuery(_ query: String) -> String {
+        let component = query.components(separatedBy: .whitespaces)
+        let queryComponent = component.map { $0+"+"}
+        return queryComponent.joined()
+    }
+    
     /*
-    var changed = false
-    var photos: [UIImage]
-    var photosHold: [UIImage]
-    
-    var holdArr: [PopularResults]
-    var popArr: [PopularResults]
-    
-    var localData: [Favorite]
-    
-    init(_ results: [PopularResults]) {
-        self.holdArr = results
-        self.popArr = results
-        
-        self.photos = []
-        self.photosHold = []
-        
-        self.localData = CDManager.shared.loadData()
-    }
-    
-    mutating func addPhoto(_ photo: UIImage) {
-        self.photos.append(photo)
-        self.photosHold.append(photo)
-    }
-    
-    mutating func getData() {
-        self.localData = CDManager.shared.loadData()
-    }
- */
+     var changed = false
+     var photos: [UIImage]
+     var photosHold: [UIImage]
+     
+     var holdArr: [PopularResults]
+     var popArr: [PopularResults]
+     
+     var localData: [Favorite]
+     
+     init(_ results: [PopularResults]) {
+     self.holdArr = results
+     self.popArr = results
+     
+     self.photos = []
+     self.photosHold = []
+     
+     self.localData = CDManager.shared.loadData()
+     }
+     
+     mutating func addPhoto(_ photo: UIImage) {
+     self.photos.append(photo)
+     self.photosHold.append(photo)
+     }
+     
+     mutating func getData() {
+     self.localData = CDManager.shared.loadData()
+     }
+     */
 }

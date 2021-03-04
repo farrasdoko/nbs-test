@@ -28,16 +28,12 @@ class TmdbApi: ImageService {
     
     func getRequest(_ query: String) -> URL {
         var components = URLComponents(string: baseUrl)
-        components?.path = ApiHeader.popular.rawValue
+        components?.path = ApiHeader.search.rawValue
         
         // params
         components?.queryItems = [
             URLQueryItem(name: "api_key", value: API_KEY),
-            URLQueryItem(name: "language", value: "en-US"),
-            URLQueryItem(name: "sort_by", value: "popularity.desc"),
-            URLQueryItem(name: "include_adult", value: "false"),
-            URLQueryItem(name: "include_video", value: "false"),
-            URLQueryItem(name: "page", value: "1"),
+            URLQueryItem(name: "query", value: query)
         ]
         
         return components!.url!
