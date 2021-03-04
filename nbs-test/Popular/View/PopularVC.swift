@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class PopularVC: UIViewController {
     
@@ -13,38 +14,46 @@ class PopularVC: UIViewController {
     @IBOutlet weak var popularTable: UICollectionView!
     lazy var searchController = UISearchController()
     
-    var viewModel: SearchVM? {
-        didSet {
-            DispatchQueue.main.async {
-                self.popularTable.reloadData()
-            }
-        }
-    }
+    var viewModel: SearchVM?
+    var cancellable: AnyCancellable?
+    var imageUrls = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        initSearchController()
+        initCollectionView()
+        
+        viewModel = SearchVM(services: [TmdbApi()])
+        cancellable = viewModel?.$imageUrls.sink { self.imageUrls = $0 }
+        
+        register(popularTable)
+//        fetchApi()
+        statusLb.text = ""
+    }
+    /*
+    override func viewDidAppear(_ animated: Bool) {
+        viewModel?.getData()
+    }
+    */
+    // MARK: Initialization
+    func initSearchController() {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search"
         searchController.searchBar.delegate = self
         self.navigationItem.searchController = searchController
-        
+    }
+    func initCollectionView() {
         popularTable.dataSource = self
         popularTable.delegate = self
-        
-        register(popularTable)
-        fetchApi()
-        statusLb.text = ""
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        viewModel?.getData()
-    }
-    
     func register(_ collectionView: UICollectionView) {
         let nib = UINib(nibName: PopularHelper.searchNib, bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: PopularHelper.searchCellID)
     }
     
+    //MARK: other func
+    /*
     func fetchApi() {
         let manager = ApiManager()
         manager.fetchPopular(isComingSoon: false, completion: {
@@ -79,6 +88,7 @@ class PopularVC: UIViewController {
             }
         }
     }
+    */
     
 }
 
@@ -132,6 +142,7 @@ extension PopularVC: UICollectionViewDataSource, UICollectionViewDelegate, UICol
 }
 
 extension PopularVC: UISearchBarDelegate {
+    /*
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         // prevent error
         viewModel?.changed = true
@@ -150,6 +161,7 @@ extension PopularVC: UISearchBarDelegate {
             }
         }
     }
+ */
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         if searchBar.text != "" {
@@ -157,7 +169,7 @@ extension PopularVC: UISearchBarDelegate {
         }
         resignFirstResponder()
     }
-    
+    /*
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         guard let holdArr = viewModel?.holdArr else { return }
         guard let photos = viewModel?.photosHold else { return }
@@ -170,4 +182,5 @@ extension PopularVC: UISearchBarDelegate {
         
         resignFirstResponder()
     }
+    */
 }

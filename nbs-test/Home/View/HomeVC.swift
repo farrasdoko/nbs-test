@@ -43,7 +43,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         self.navigationItem.titleView = UIImageView(image: logo)
         
         registerNib()
-        fetchApi()
+//        fetchApi()
         
     }
     

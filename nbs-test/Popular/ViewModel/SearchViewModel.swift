@@ -6,8 +6,37 @@
 //
 
 import UIKit
+import Combine
 
-struct SearchVM {
+class SearchVM {
+    
+    var services: [ImageService]
+    var cancellables = Set<AnyCancellable>()
+    
+    @Published var imageUrls = [String]()
+    @Published var query: String = ""
+    
+    var queryPublisher: AnyPublisher<String, Never> {
+        return $query
+            .filter{ $0.count >= 3}
+            .debounce(for: .seconds(1), scheduler: RunLoop.main)
+            .eraseToAnyPublisher()
+    }
+    
+    init(services: [ImageService]) {
+        self.services = services
+        queryPublisher
+            .flatMap { queryString in
+                return Publishers.MergeMany( services.map{$0.search(queryString)} )
+                    .collect()
+                    .eraseToAnyPublisher()
+            }
+            .receive(on: RunLoop.main)
+            .sink{ self.imageUrls = $0.flatMap{$0} }
+            .store(in: &cancellables)
+    }
+    
+    /*
     var changed = false
     var photos: [UIImage]
     var photosHold: [UIImage]
@@ -35,4 +64,5 @@ struct SearchVM {
     mutating func getData() {
         self.localData = CDManager.shared.loadData()
     }
+ */
 }

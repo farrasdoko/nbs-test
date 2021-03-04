@@ -12,6 +12,8 @@
 		ED13921225E7810D00E5BB31 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED13921125E7810D00E5BB31 /* SearchViewModel.swift */; };
 		ED13921625E7977400E5BB31 /* HomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED13921525E7977400E5BB31 /* HomeVM.swift */; };
 		ED23AF3B25E6B20A0000A161 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED23AF3A25E6B20A0000A161 /* Utils.swift */; };
+		ED3D1B5625EF71E100C15DB4 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D1B5525EF71E100C15DB4 /* Services.swift */; };
+		ED3D1B5925EF71F400C15DB4 /* Tmdb.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D1B5825EF71F400C15DB4 /* Tmdb.swift */; };
 		ED958A1C25E4B5370012E349 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED958A1B25E4B5370012E349 /* Colors.xcassets */; };
 		ED958A2025E4B92B0012E349 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED958A1F25E4B92B0012E349 /* FavoriteCell.swift */; };
 		ED958A2425E4B95D0012E349 /* FavoriteHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED958A2325E4B95D0012E349 /* FavoriteHelper.swift */; };
@@ -56,6 +58,8 @@
 		ED13921125E7810D00E5BB31 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		ED13921525E7977400E5BB31 /* HomeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVM.swift; sourceTree = "<group>"; };
 		ED23AF3A25E6B20A0000A161 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		ED3D1B5525EF71E100C15DB4 /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
+		ED3D1B5825EF71F400C15DB4 /* Tmdb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tmdb.swift; sourceTree = "<group>"; };
 		ED958A1B25E4B5370012E349 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		ED958A1F25E4B92B0012E349 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		ED958A2325E4B95D0012E349 /* FavoriteHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteHelper.swift; sourceTree = "<group>"; };
@@ -139,6 +143,15 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		ED3D1B5425EF71D600C15DB4 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				ED3D1B5525EF71E100C15DB4 /* Services.swift */,
+				ED3D1B5825EF71F400C15DB4 /* Tmdb.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		ED958A2225E4B94F0012E349 /* public */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +175,7 @@
 		EDE23C9825E4E416006B2216 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				ED3D1B5425EF71D600C15DB4 /* Services */,
 				EDE23C9A25E4E458006B2216 /* ApiManager.swift */,
 				EDE23CAC25E4F7FF006B2216 /* UIImage+Extension.swift */,
 				EDED5D6825E5FF7E00622267 /* DataManager.swift */,
@@ -408,6 +422,7 @@
 				ED23AF3B25E6B20A0000A161 /* Utils.swift in Sources */,
 				ED958A2425E4B95D0012E349 /* FavoriteHelper.swift in Sources */,
 				EDE23C9625E4E372006B2216 /* PopularBase.swift in Sources */,
+				ED3D1B5625EF71E100C15DB4 /* Services.swift in Sources */,
 				EDE23CBE25E52C56006B2216 /* ProductionCountries.swift in Sources */,
 				EDE23CA425E4EB31006B2216 /* DetailVC.swift in Sources */,
 				EDE23CC225E52C56006B2216 /* BelongsToCollection.swift in Sources */,
@@ -425,6 +440,7 @@
 				EDF9CC5825E3C3E4002BB54B /* AppDelegate.swift in Sources */,
 				EDF9CC5A25E3C3E4002BB54B /* SceneDelegate.swift in Sources */,
 				ED958A2025E4B92B0012E349 /* FavoriteCell.swift in Sources */,
+				ED3D1B5925EF71F400C15DB4 /* Tmdb.swift in Sources */,
 				EDE23CB325E50C50006B2216 /* PopulaCell.swift in Sources */,
 				EDE23CA925E4F373006B2216 /* ApiHeader.swift in Sources */,
 				EDED5D6F25E635A200622267 /* CDDetail.swift in Sources */,
