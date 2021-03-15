@@ -21,7 +21,6 @@ class DetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setBtnTitle()
         
         guard let isFavorite = viewModel?.addedToFav else {return }
