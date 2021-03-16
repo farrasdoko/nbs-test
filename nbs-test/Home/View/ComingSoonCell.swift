@@ -16,7 +16,6 @@ class ComingSoonCell: UICollectionViewCell {
     }
     
     func configure(_ image: UIImage) {
-        print("configure the poster image: \(image)")
         poster.image = image
     }
 

@@ -19,8 +19,6 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     @IBOutlet weak var banner2: UIImageView!
     @IBOutlet weak var banner3: UIImageView!
     
-    let group = DispatchGroup()
-    
     var viewModel = HomeVM() {
         didSet {
             DispatchQueue.main.async {
@@ -43,8 +41,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         self.navigationItem.titleView = UIImageView(image: logo)
         
         registerNib()
-//        fetchApi()
-        
+        fetchApi()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -137,7 +134,6 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     func fetchApi() {
         statusLb.text = "Loading..."
         let apiManager = ApiManager.init()
-        group.enter()
         apiManager.fetchPopular(isComingSoon: false, completion: {result in
             
             switch result {
@@ -145,9 +141,14 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 guard let result = popular.results else { return }
                 self.viewModel.popArray = result
                 
-                self.fetchBanner()
-                self.fetchImage()
-                self.group.leave()
+                DispatchQueue.global().async {
+                    self.fetchBanner()
+                }
+                
+                DispatchQueue.global().async {
+                    self.fetchImage()
+                }
+                
                 break
             case .failure(let error):
                 if let err = error as? ApiError {
@@ -158,21 +159,20 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                         self.statusLb.text = "Can't decode data"
                     }
                 }
-                self.group.leave()
                 print(error)
                 break
             }
         })
         statusCsLb.text = "Loading..."
-        group.enter()
         apiManager.fetchPopular(isComingSoon: true, completion: {result in
             
             switch result {
             case .success(let comingSoon):
                 guard let result = comingSoon.results else { return }
                 self.viewModel.comingSoonArr = result
-                self.fetchImageCS()
-                self.group.leave()
+                DispatchQueue.global().async {
+                    self.fetchImageCS()
+                }
                 break
             case .failure(let error):
                 if let err = error as? ApiError {
@@ -183,7 +183,6 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                         self.statusLb.text = "Can't decode data"
                     }
                 }
-                self.group.leave()
                 print(error)
                 break
             }
@@ -195,19 +194,15 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         for item in viewModel.popArray {
             guard let poster = item.posterPath else { continue }
             guard let url = URL(string: imageUrl+poster) else {continue}
-            
-            group.enter()
-            if let data = try? Data(contentsOf: url) {
-                
-                if let image = UIImage(data: data) {
-                    viewModel.popPhotos.append(image)
-                    DispatchQueue.main.async {
-                        self.statusLb.isHidden = true
+                if let data = try? Data(contentsOf: url) {
+                    if let image = UIImage(data: data) {
+                        self.viewModel.popPhotos.append(image)
+                        DispatchQueue.main.async {
+                            self.statusLb.isHidden = true
+                        }
                     }
                 }
-                
-            }
-            self.group.leave()
+            
         }
     }
     
@@ -216,40 +211,37 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         for item in viewModel.comingSoonArr {
             guard let poster = item.posterPath else {continue }
             guard let url = URL(string: imageUrl+poster) else {continue}
-            
-            group.enter()
-            if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data) {
-                    viewModel.comingSoonPhotos.append(image)
-                    DispatchQueue.main.async {
-                        self.statusCsLb.isHidden = true
+                if let data = try? Data(contentsOf: url) {
+                    if let image = UIImage(data: data) {
+                        self.viewModel.comingSoonPhotos.append(image)
+                        DispatchQueue.main.async {
+                            self.statusCsLb.isHidden = true
+                        }
                     }
                 }
-            }
-            self.group.leave()
+            
         }
     }
     
     func fetchBanner() {
         if let path = viewModel.popArray.first?.backdropPath {
-            self.group.enter()
-            
+            print("banner1 fetching")
             self.banner1.load(path, completion: {
-                self.group.leave()
+                print("banner1 completed")
             })
         }
+        
         if let path = viewModel.popArray[1].backdropPath {
-            self.group.enter()
-            
+            print("banner2 fetching")
             self.banner2.load(path, completion: {
-                self.group.leave()
+                print("banner2 completed")
             })
         }
+        
         if let path = viewModel.popArray[2].backdropPath {
-            self.group.enter()
-            
+            print("banner3 fetching")
             self.banner3.load(path, completion: {
-                self.group.leave()
+                print("banner3 copmleted")
             })
         }
     }

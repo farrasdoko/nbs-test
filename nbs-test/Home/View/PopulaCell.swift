@@ -18,7 +18,6 @@ class PopulaCell: UICollectionViewCell {
     
     func configure(_ image: UIImage) {
         self.posterImg.image = image
-        print("configure the populer image: \(image)")
     }
 
 }
