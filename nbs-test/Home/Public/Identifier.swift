@@ -15,3 +15,7 @@ struct HomeHelper {
     static var comingSoonNib = "ComingSoonCell"
 }
 
+enum SenderHome {
+    case popular
+    case comingSoon
+}

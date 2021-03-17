@@ -19,33 +19,33 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     @IBOutlet weak var banner2: UIImageView!
     @IBOutlet weak var banner3: UIImageView!
     
-    var viewModel = HomeVM() {
-        didSet {
-            DispatchQueue.main.async {
-                self.popularTable.reloadData()
-                self.comingSoonTable.reloadData()
-            }
-        }
-    }
+    var viewModel = HomeVM()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let logo = UIImage(named: "movie_logo")
+        self.navigationItem.titleView = UIImageView(image: logo)
+        
+        initTableView()
+        registerNib()
+        
+        viewModel.delegate = self
+        
+        viewModel.fetchPopular()
+        viewModel.fetchComingSoon()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        viewModel.getData()
+    }
+    
+    func initTableView() {
         popularTable.dataSource = self
         popularTable.delegate = self
         
         comingSoonTable.dataSource = self
         comingSoonTable.delegate = self
-        
-        let logo = UIImage(named: "movie_logo")
-        self.navigationItem.titleView = UIImageView(image: logo)
-        
-        registerNib()
-        fetchApi()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        viewModel.getData()
     }
     
     // MARK: - Collection View Protocol
@@ -131,98 +131,6 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         comingSoonTable.register(comingSoonNib, forCellWithReuseIdentifier: HomeHelper.comingSoonCellID)
     }
     
-    func fetchApi() {
-        statusLb.text = "Loading..."
-        let apiManager = ApiManager.init()
-        apiManager.fetchPopular(isComingSoon: false, completion: {result in
-            
-            switch result {
-            case .success(let popular):
-                guard let result = popular.results else { return }
-                self.viewModel.popArray = result
-                
-                DispatchQueue.global().async {
-                    self.fetchBanner()
-                }
-                
-                DispatchQueue.global().async {
-                    self.fetchImage()
-                }
-                
-                break
-            case .failure(let error):
-                if let err = error as? ApiError {
-                    switch err {
-                    case .noData:
-                        self.statusLb.text = "No data available"
-                    case .cantDecode:
-                        self.statusLb.text = "Can't decode data"
-                    }
-                }
-                print(error)
-                break
-            }
-        })
-        statusCsLb.text = "Loading..."
-        apiManager.fetchPopular(isComingSoon: true, completion: {result in
-            
-            switch result {
-            case .success(let comingSoon):
-                guard let result = comingSoon.results else { return }
-                self.viewModel.comingSoonArr = result
-                DispatchQueue.global().async {
-                    self.fetchImageCS()
-                }
-                break
-            case .failure(let error):
-                if let err = error as? ApiError {
-                    switch err {
-                    case .noData:
-                        self.statusCsLb.text = "No data available"
-                    case .cantDecode:
-                        self.statusLb.text = "Can't decode data"
-                    }
-                }
-                print(error)
-                break
-            }
-        })
-    }
-    
-    func fetchImage() {
-        let imageUrl = "https://image.tmdb.org/t/p/w500"
-        for item in viewModel.popArray {
-            guard let poster = item.posterPath else { continue }
-            guard let url = URL(string: imageUrl+poster) else {continue}
-                if let data = try? Data(contentsOf: url) {
-                    if let image = UIImage(data: data) {
-                        self.viewModel.popPhotos.append(image)
-                        DispatchQueue.main.async {
-                            self.statusLb.isHidden = true
-                        }
-                    }
-                }
-            
-        }
-    }
-    
-    func fetchImageCS() {
-        let imageUrl = "https://image.tmdb.org/t/p/w500"
-        for item in viewModel.comingSoonArr {
-            guard let poster = item.posterPath else {continue }
-            guard let url = URL(string: imageUrl+poster) else {continue}
-                if let data = try? Data(contentsOf: url) {
-                    if let image = UIImage(data: data) {
-                        self.viewModel.comingSoonPhotos.append(image)
-                        DispatchQueue.main.async {
-                            self.statusCsLb.isHidden = true
-                        }
-                    }
-                }
-            
-        }
-    }
-    
     func fetchBanner() {
         if let path = viewModel.popArray.first?.backdropPath {
             print("banner1 fetching")
@@ -243,6 +151,37 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             self.banner3.load(path, completion: {
                 print("banner3 copmleted")
             })
+        }
+    }
+}
+
+extension HomeVC: HomeDelegate {
+    func fetchImageCompleted(_ sender: SenderHome) {
+        DispatchQueue.main.async {
+            switch sender {
+            case .popular:
+                self.statusLb.isHidden = true
+            case .comingSoon:
+                self.statusCsLb.isHidden = true
+            }
+        }
+    }
+    
+    func apiFail(_ sender: SenderHome) {
+        DispatchQueue.main.async {
+            switch sender {
+            case .popular:
+                self.statusLb.text = "Get Data Failed"
+            case .comingSoon:
+                self.statusCsLb.text = "Get Data Failed"
+            }
+        }
+    }
+    
+    func reloadTableView() {
+        DispatchQueue.main.async {
+            self.popularTable.reloadData()
+            self.comingSoonTable.reloadData()
         }
     }
 }
