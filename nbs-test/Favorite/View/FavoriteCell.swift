@@ -23,12 +23,12 @@ class FavoriteCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func configure(img: UIImage, title: String, year: String, genres: String) {
-        posterImg.image = img
-        titleLb.text = title
-        yearLb.text = year
-        genresLb.text = genres
-    }
+//    func configure(img: UIImage, title: String, year: String, genres: String) {
+//        posterImg.image = img
+//        titleLb.text = title
+//        yearLb.text = year
+//        genresLb.text = genres
+//    }
     
     func configure(_ favorite: Favorite) {
         if let data = favorite.banner {
