@@ -7,15 +7,7 @@
 
 import UIKit
 import Combine
-/*
-struct FavoriteVM {
-    var favorites: Favorite
-    
-    init(_ favorite: Favorite) {
-        self.favorites = favorite
-    }
-}
-*/
+
 class FavoriteVM {
     var favorites: [Favorite]
     var manager: CDManager

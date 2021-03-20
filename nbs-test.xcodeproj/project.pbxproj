@@ -14,6 +14,7 @@
 		ED23AF3B25E6B20A0000A161 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED23AF3A25E6B20A0000A161 /* Utils.swift */; };
 		ED3D1B5625EF71E100C15DB4 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D1B5525EF71E100C15DB4 /* Services.swift */; };
 		ED3D1B5925EF71F400C15DB4 /* Tmdb.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D1B5825EF71F400C15DB4 /* Tmdb.swift */; };
+		ED4467912605813D0026878F /* BtnTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4467902605813D0026878F /* BtnTitle.swift */; };
 		ED958A1C25E4B5370012E349 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED958A1B25E4B5370012E349 /* Colors.xcassets */; };
 		ED958A2025E4B92B0012E349 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED958A1F25E4B92B0012E349 /* FavoriteCell.swift */; };
 		ED958A2425E4B95D0012E349 /* FavoriteHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED958A2325E4B95D0012E349 /* FavoriteHelper.swift */; };
@@ -60,6 +61,7 @@
 		ED23AF3A25E6B20A0000A161 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		ED3D1B5525EF71E100C15DB4 /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		ED3D1B5825EF71F400C15DB4 /* Tmdb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tmdb.swift; sourceTree = "<group>"; };
+		ED4467902605813D0026878F /* BtnTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtnTitle.swift; sourceTree = "<group>"; };
 		ED958A1B25E4B5370012E349 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		ED958A1F25E4B92B0012E349 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		ED958A2325E4B95D0012E349 /* FavoriteHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteHelper.swift; sourceTree = "<group>"; };
@@ -161,6 +163,14 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		ED44678A260581190026878F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ED4467902605813D0026878F /* BtnTitle.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		ED958A2225E4B94F0012E349 /* public */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +222,7 @@
 		EDE23CA225E4EB15006B2216 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				ED44678A260581190026878F /* Model */,
 				ED13920325E7529800E5BB31 /* ViewModel */,
 				EDE23CA325E4EB31006B2216 /* DetailVC.swift */,
 			);
@@ -433,6 +444,7 @@
 				EDE23CBF25E52C56006B2216 /* SpokenLanguages.swift in Sources */,
 				EDE23CC025E52C56006B2216 /* Detail.swift in Sources */,
 				EDE23C9F25E4E7E6006B2216 /* ApiError.swift in Sources */,
+				ED4467912605813D0026878F /* BtnTitle.swift in Sources */,
 				EDC27CB526019BBA00AFBD3F /* HomeDelegate.swift in Sources */,
 				ED13921625E7977400E5BB31 /* HomeVM.swift in Sources */,
 				ED958A2E25E4E0500012E349 /* ComingSoonCell.swift in Sources */,

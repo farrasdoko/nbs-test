@@ -34,7 +34,6 @@ class FavoriteVC: UIViewController {
         viewModel = FavoriteVM()
         
         viewModel.pub.sink { vc in
-            print("get executed")
             self.navigationController?.pushViewController(vc, animated: true)
         }.store(in: &bag)
     }
@@ -43,6 +42,7 @@ class FavoriteVC: UIViewController {
         searchController.searchBar.resignFirstResponder()
         viewModel.refreshData()
         statusLb.isHidden = viewModel.favorites.count != 0
+        favoriteTbl.reloadData()
     }
     
     func initSearchController() {

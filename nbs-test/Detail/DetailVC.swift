@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class DetailVC: UIViewController {
     
@@ -18,89 +19,26 @@ class DetailVC: UIViewController {
     @IBOutlet weak var bodyLb: UITextView!
     
     var viewModel: DetailVM?
+    var bag = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setBtnTitle()
+        viewModel?.$btnTitle.sink { value in
+            self.addToFav.setTitle(value.rawValue, for: .normal)
+        }.store(in: &bag)
         
-        guard let isFavorite = viewModel?.addedToFav else {return }
-        if !isFavorite {
-            fetchMovie()
-            return
-        }
-        
-        showData()
+        viewModel?.moviePub
+            .receive(on: DispatchQueue.main)
+            .sink { movie in
+                self.titleLb.text = movie.title
+                self.genresLb.text = movie.genre
+                self.bodyLb.text = movie.body == "" ? "No overview available." : movie.body
+                self.bannerImg.image = movie.banner
+            }.store(in: &bag)
     }
     
     @IBAction func addToFav(_ sender: UIButton) {
-        guard let favoriteMovie = viewModel?.movie else { print("is nil"); return }
-        guard let isFav = viewModel?.addedToFav else { return }
-        
-        if isFav {
-            CDManager.shared.deleteData(by: favoriteMovie.movieID)
-        } else {
-            CDManager.shared.addData(movie: favoriteMovie)
-        }
-        
-        viewModel?.addedToFav = !isFav
-        setBtnTitle()
-    }
-    
-    func fetchMovie() {
-        let apiManager = ApiManager()
-        guard let id = viewModel?.movieID else { return }
-        
-        apiManager.fetchDetail(id, completion: { result in
-            switch result {
-            case .success(let detail):
-                print("suceess")
-                DispatchQueue.main.async {
-                    self.viewModel?.addMovie(detail)
-                    if let poster = detail.posterPath {
-                        self.bannerImg.load(poster) {
-                            self.viewModel?.addPoster(self.bannerImg.image)
-                        }
-                    }
-                    if let banner = detail.backdropPath {
-                        let image = self.fetchImage(banner)
-                        self.viewModel?.addBanner(image)
-                    }
-                    self.titleLb.text = detail.title
-                    self.genresLb.text = Utils.getGenres(detail.genres)
-                    self.bodyLb.text = detail.overview
-                    if detail.overview == "" {
-                        self.bodyLb.text = "no overview available."
-                    }
-                }
-                break
-            case .failure(_):
-                print("fail")
-                break
-            }
-        })
-    }
-    
-    func setBtnTitle() {
-        guard let isFav = viewModel?.addedToFav else { return }
-        addToFav.setTitle(isFav ? "Remove From Favorite":"Add To Favorite", for: .normal)
-    }
-    
-    func showData() {
-        self.bannerImg.image = viewModel?.movie?.image
-        self.titleLb.text = viewModel?.movie?.title
-        self.genresLb.text = viewModel?.movie?.genre
-        self.bodyLb.text = viewModel?.movie?.body
-    }
-    
-    func fetchImage(_ imgID: String) -> UIImage? {
-        let imageUrl = "https://image.tmdb.org/t/p/w500\(imgID)"
-        guard let url = URL(string: imageUrl) else {return nil}
-        if let data = try? Data(contentsOf: url) {
-            if let image = UIImage(data: data) {
-                return image
-            }
-        }
-        return nil
+        viewModel?.addToFavorite()
     }
     
 }
