@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 class FavoriteVM {
-    var favorites: [Favorite]
+    @Published var favorites: [Favorite]
     var manager: CDManager
     let pub = PassthroughSubject<UIViewController, Never>()
     
@@ -27,7 +27,11 @@ class FavoriteVM {
         
         let movie = favorites[row]
         detailVC.viewModel = DetailVM(movie)
-        print("detailVC = \(detailVC)")
         pub.send(detailVC)
+    }
+    func deleteMovie(_ index: Int) {
+        let id = favorites[index].objectID
+        manager.deleteData(by: id)
+        refreshData()
     }
 }

@@ -16,14 +16,6 @@ class FavoriteVC: UIViewController {
     var bag = Set<AnyCancellable>()
     
     var viewModel: FavoriteVM!
-//    {
-//        didSet {
-//            DispatchQueue.main.async {
-//                self.favoriteTbl.reloadData()
-//            }
-//        }
-//    }
-//    var holderArr = [FavoriteVM]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,13 +28,17 @@ class FavoriteVC: UIViewController {
         viewModel.pub.sink { vc in
             self.navigationController?.pushViewController(vc, animated: true)
         }.store(in: &bag)
+        viewModel.$favorites.sink { v in
+            print("\(v.count) V counted:")
+            self.favoriteTbl.reloadData()
+        }.store(in: &bag)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         searchController.searchBar.resignFirstResponder()
         viewModel.refreshData()
         statusLb.isHidden = viewModel.favorites.count != 0
-        favoriteTbl.reloadData()
+//        favoriteTbl.reloadData()
     }
     
     func initSearchController() {
@@ -61,6 +57,7 @@ class FavoriteVC: UIViewController {
 extension FavoriteVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("counted here: \(viewModel.favorites.count)")
         return viewModel.favorites.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -75,14 +72,12 @@ extension FavoriteVC: UITableViewDelegate, UITableViewDataSource, UISearchBarDel
         viewModel.selectedRow(indexPath.row)
     }
     
-//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//        let delete = UIContextualAction(style: .destructive, title: "Delete") { (_, _, _) in
-//            let id = self.viewModel[indexPath.row].favorites.objectID
-//            CDManager.shared.deleteData(by: id)
-//            self.getData()
-//        }
-//        return UISwipeActionsConfiguration(actions: [delete])
-//    }
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .destructive, title: "Delete") { (_, _, _) in
+            self.viewModel.deleteMovie(indexPath.row)
+        }
+        return UISwipeActionsConfiguration(actions: [delete])
+    }
     /*
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         viewModel.removeAll()

@@ -75,6 +75,7 @@ class CDManager {
                     objContext.delete(deleteObj)
                 }
             }
+            try objContext.save()
         } catch {
             print("delete by 'movieID' fail")
             fatalError()
