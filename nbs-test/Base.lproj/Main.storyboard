@@ -302,36 +302,35 @@
                                 <rect key="frame" x="20" y="68" width="374" height="619"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="favoriteCell" rowHeight="110" id="9Kh-SY-ak8" customClass="FavoriteCell" customModule="nbs_test" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="374" height="110"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="favoriteCell" id="9Kh-SY-ak8" customClass="FavoriteCell" customModule="nbs_test" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="374" height="172"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9Kh-SY-ak8" id="NIu-5t-MPI">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="110"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="172"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rK5-TQ-dbA">
-                                                    <rect key="frame" x="0.0" y="11" width="178" height="88"/>
+                                                    <rect key="frame" x="0.0" y="11" width="112.33333333333333" height="150"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="178" id="2pj-s0-hJt"/>
-                                                        <constraint firstAttribute="height" priority="750" constant="88" id="lJQ-xs-nhj"/>
+                                                        <constraint firstAttribute="width" secondItem="rK5-TQ-dbA" secondAttribute="height" multiplier="15:20" id="8XM-Ln-0zO"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Itaewon Class" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xpU-OA-ixm">
-                                                    <rect key="frame" x="188" y="11" width="157" height="20"/>
+                                                    <rect key="frame" x="122.33333333333333" y="11" width="222.66666666666669" height="20"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2020" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SFC-3L-wBM">
-                                                    <rect key="frame" x="188" y="39" width="34" height="17"/>
+                                                    <rect key="frame" x="122.33333333333331" y="39" width="34" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Drama, Asian, Comedy, Series" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tNu-L3-fRI">
-                                                    <rect key="frame" x="188" y="61.000000000000007" width="186" height="14.333333333333336"/>
+                                                    <rect key="frame" x="122.33333333333333" y="61.000000000000007" width="251.66666666666669" height="14.333333333333336"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="liB-xT-KE5">
@@ -348,6 +347,7 @@
                                                 <constraint firstItem="SFC-3L-wBM" firstAttribute="top" secondItem="xpU-OA-ixm" secondAttribute="bottom" constant="8" symbolic="YES" id="6Ne-aZ-fGI"/>
                                                 <constraint firstItem="rK5-TQ-dbA" firstAttribute="top" secondItem="NIu-5t-MPI" secondAttribute="topMargin" id="CNR-8o-QW6"/>
                                                 <constraint firstAttribute="trailing" secondItem="liB-xT-KE5" secondAttribute="trailing" id="EE7-xw-Cne"/>
+                                                <constraint firstItem="rK5-TQ-dbA" firstAttribute="width" secondItem="NIu-5t-MPI" secondAttribute="width" multiplier="0.3" id="EJv-rm-hlD"/>
                                                 <constraint firstItem="rK5-TQ-dbA" firstAttribute="bottom" secondItem="NIu-5t-MPI" secondAttribute="bottomMargin" id="LQg-EJ-ior"/>
                                                 <constraint firstItem="rK5-TQ-dbA" firstAttribute="leading" secondItem="NIu-5t-MPI" secondAttribute="leading" id="Me3-24-pVT"/>
                                                 <constraint firstItem="liB-xT-KE5" firstAttribute="leading" secondItem="xpU-OA-ixm" secondAttribute="trailing" constant="5" id="UjJ-na-ORQ"/>
